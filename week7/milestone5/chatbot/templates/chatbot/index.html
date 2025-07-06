@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IITB UG Rule Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .bot-msg, .user-msg {
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      max-width: 75%;
+    }
+    .bot-msg {
+      background-color: #1e1e1e;
+      align-self: flex-start;
+    }
+    .user-msg {
+      background-color: #2b2b2b;
+      align-self: flex-end;
+    }
+    .input-bar {
+      background-color: #121212;
+      border-top: 1px solid #444;
+      padding: 1rem 0;
+    }
+    .input-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-control {
+      width: 60%;
+      height: 3rem;
+      background-color: #2b2b2b;
+      border: none;
+      color: #fff;
+    }
+    .form-control::placeholder {
+      color: #bbb;
+    }
+    .form-control:focus {
+      background-color: #2b2b2b;
+      color: #fff;
+      box-shadow: none;
+    }
+    .btn-send {
+      height: 3rem;
+    }
+    .typing {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .typing span {
+      height: 8px;
+      width: 8px;
+      margin: 0 2px;
+      background-color: #ccc;
+      border-radius: 50%;
+      display: inline-block;
+      animation: bounce 1.4s infinite;
+    }
+    .typing span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .typing span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-8px);
+      }
+    }
+
+    #btn-send {
+        background-color: transparent; /* initial background */
+        border: 2px solid white; /* initial border */
+        transition: all 0.3s ease;
+    }
+
+    #btn-send i {
+        color: white;
+        transition: color 0.3s ease;
+    }
+
+    #btn-send :hover {
+        background-color: black;
+        border-color: white;
+    }
+
+    #btn-send :hover i {
+        color: white; /* keep icon white on hover */
+    }
+
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+  <header class="text-light text-center">
+    <h4 class="mb-0 py-3" style="
+        background: #343a40;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-bottom: 1px solid #333;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    ">
+        🤖 IITB UG Rule Assistant
+    </h4>
+</header>
+
+  <div class="chat-container" style="width: 80%; margin: 0 auto;" >
+    <div class="chat-box" id="chat-box">
+      <div class="bot-msg">Hi! I’m your IITB UG Rule Assistant Bot 🤖 — ask me anything about IIT Bombay’s undergraduate academic rules and I’ll help you out!</div>
+    </div>
+  </div>
+
+  <form id="chat-form" class="input-bar">
+    <div class="input-wrapper">
+      {% csrf_token %}
+      <input type="text" id="question-input" name="question" class="form-control me-2" placeholder="Type your question..." required>
+      <button type="submit" class="btn btn-outline-light btn-send">
+      <i class="bi bi-send"></i>
+      </button>
+    </div>
+  </form>
+
+  <script>
+    const csrftoken = '{{ csrf_token }}';
+
+    $('#chat-form').submit(function(e) {
+      e.preventDefault();
+      const question = $('#question-input').val().trim();
+      if (question === '') return;
+
+      $('#chat-box').append(`<div class="user-msg">${question}</div>`);
+      const spinnerId = Date.now();
+      $('#chat-box').append(`
+        <div class="bot-msg" id="spinner-${spinnerId}">
+          <div class="typing">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      `);
+      $('#question-input').val('');
+      $('.chat-container').scrollTop($('.chat-container')[0].scrollHeight);
+
+      $.ajax({
+        url: '/api/chat/',
+        type: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        data: { question: question },
+        success: function(response) {
+          $(`#spinner-${spinnerId}`).replaceWith(`<div class="bot-msg">${response.answer}</div>`);
+          $('.chat-container').scrollTop($('.chat-container')[0].scrollHeight);
+        },
+        error: function() {
+          $(`#spinner-${spinnerId}`).replaceWith(`<div class="bot-msg">Sorry, an error occurred.</div>`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
