@@ -1,4 +1,4 @@
-# Week 1
+# Week 1-2
 
  This repository contains hands-on mini-project and exploratory notebooks focused on foundational and intermediate-level NLP tasks.
 

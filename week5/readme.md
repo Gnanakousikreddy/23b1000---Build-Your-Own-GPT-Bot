@@ -1,4 +1,4 @@
-# Week 3 
+# Week 5
 
 This repository expands on earlier efforts by introducing **pre-trained transformer models** for sentiment analysis and broader NLP tasks using the Hugging Face ecosystem. It includes both a milestone project and hands-on experiments with transformers.
 

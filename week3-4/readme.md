@@ -1,4 +1,4 @@
-# Week 2
+# Week 3-4
 
 This repository showcases hands-on projects and practice notebooks focusing on **deep learning for NLP** using PyTorch.
 
