@@ -35,4 +35,32 @@ This week also included exploration of **Hugging Face transformers**, experiment
 ---
 
 
+## 📅 Week 6 – Gemini API Exploration & Conversational Chatbot
 
+In the sixth week, the focus shifted from classical NLP to modern **LLM API integration**.  
+I explored the **Gemini Free 2.5 / 2.0 Flash API**, learning how to send prompts and receive responses using **Postman** and **Python**.
+
+Building on this, a **basic local HTML website** was created to demonstrate a simple Gemini-powered conversational chatbot.  
+This was then extended by building a **Node.js-based chatbot** website.
+
+> ✅ **Milestone 4:** Created a functional conversational chatbot using the **Gemini 2.0 API**, marking the first end-to-end chatbot in the project.
+
+
+---
+
+## 📅 Week 7 – RAG-Enabled IITB UG Rule Assistance Bot
+
+The seventh week focused on adding **Retrieval-Augmented Generation (RAG)** to enhance chatbot accuracy for domain-specific tasks.  
+I studied how to use RAG to combine a retriever and a generator for better context handling.
+
+Using this approach, I developed the **IITB UG Rule Assistance Bot**:
+- It answers student queries about **IIT Bombay’s UG academic rules and circulars**.
+- It uses a retriever to fetch the most relevant sections from the rulebook.
+- It uses the **Gemini API** to generate clear, student-friendly answers.
+
+The chatbot is **hosted using Django**, demonstrating deployment of a complete RAG-powered chatbot.
+
+> ✅ **Milestone 5:** Built and hosted the **IITB UG Rule Assistance Bot**, showing end-to-end integration of RAG and Gemini in a practical student use case.
+
+
+---
