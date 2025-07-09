@@ -70,9 +70,9 @@ def run_query(user_query):
 if __name__ == "__main__":
     question = "Can I take a semester drop in IIT Bombay?"
     answer, sources = run_query(question)
-    print("\n💡 Answer:")
+    print("\n Answer:")
     print(answer)
-    print("\n📚 Sources:")
+    print("\n Sources:")
     for doc in sources:
         print("---")
         print(doc.page_content[:200])
