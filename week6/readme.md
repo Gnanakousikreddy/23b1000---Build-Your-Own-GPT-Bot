@@ -31,5 +31,5 @@ This week focused on learning how to use the **Gemini  2.0 Flash API** to build 
 
 Here’s a demo of the deployed chatbot in action:
 
-![Gemini API Bot Demo](./geminiapi_bot_preview.mp4)
+![Gemini API Bot Demo](./geminiapi_bot.gif)
 
