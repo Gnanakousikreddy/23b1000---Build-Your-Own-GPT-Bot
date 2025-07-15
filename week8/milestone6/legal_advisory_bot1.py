@@ -39,14 +39,28 @@ while True :
 
     chunk = get_relevant_chunk(cleaned_text, user_input)
 
-    prompt = f"""You are an Legal Advisor Bot that only answers based on the context below.
-    If the answer is not in the context, respond only with 'I don't know'.
 
-    Context:
+    prompt = f"""
+    You are a strict Legal Advisory Assistant.
+
+    ONLY use the CONTEXT below to answer the QUESTION.
+
+    If you do not find the answer in the CONTEXT, respond with EXACTLY:
+    I don't know
+
+    DO NOT guess, do not add disclaimers, do not mention the context, do not mention yourself, and do not apologize.
+
+    Respond ONLY with the answer or EXACTLY:
+    I don't know
+
+    === CONTEXT ===
     {chunk}
 
-    User Question:
+    === QUESTION ===
     {user_input}
+
+    Your final answer must be either from the CONTEXT or EXACTLY:
+    I don't know
     """
 
     payload = {
