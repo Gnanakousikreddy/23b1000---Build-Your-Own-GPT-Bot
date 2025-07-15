@@ -64,3 +64,19 @@ The chatbot is **hosted using Django**, demonstrating deployment of a complete R
 
 
 ---
+
+## 📅 Week 8 – Legal Adviser Bot with PDF + Ollama
+
+In Week 8, I built a Legal Adviser Bot that uses a local PDF on Indian laws and runs on an Ollama-served LLM (TinyLLaMA).
+
+Key steps:
+- Extracted and cleaned legal text with `PyPDF2` and regex.
+- Added a chunk retriever to pull relevant sections for each question.
+- Integrated the Ollama Python client to query the local LLM.
+- Applied strict prompt engineering and a post-check to reject answers not found in the PDF, replying with *“I don't know”* when needed.
+
+> ✅ Milestone 6: Delivered a working Legal Adviser Bot that combines local LLM serving, PDF knowledge, and controlled response generation.
+
+
+
+---
